@@ -6,8 +6,8 @@ services:
       dockerfile: Dockerfile
     environment:
       DB_HOST: db
-      DB_DATABASE: laravel_test_api
-      DB_USERNAME: root
+      DB_DATABASE: laravel_test_apii
+      DB_USERNAME: dusan
       DB_PASSWORD: root
     ports:
       - 8000:8000
@@ -33,15 +33,25 @@ services:
       - app
 
   db:
-    image: mysql:5.7.22
+    container_name: db
+    image: mysql:8.0
+    ports:
+      - '3306:3306'
     environment:
-      MYSQL_DATABASE: 'laravel_test_api'
-      MYSQL_USER: 'root'
+      MYSQL_DATABASE: 'laravel_test_apii'
+      MYSQL_USER: 'dusan'
       MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
     networks:
       - app
 
 networks:
   app:
     driver: bridge
+
+volumes:
+  my-db:
